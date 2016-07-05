@@ -3,31 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Owner;
+use App\guest;
 use Auth;
 
-class ownerController extends Controller
+use App\Http\Requests;
+
+class GuestController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * the construct method runs before any other method in the class.
+     * the auth middleware checks if user is logged in the redirect a non logged
+     * in user to the login page
      */
+
     public function __construct()
     {
         $this->middleware("auth");
 
     }
 
-
+    /**
+     *
+     */
     public function index()
     {
-        if(Auth::user()->isOwner()){
-            return view('owner.index');
+        if(Auth::user()->isGuest()){
+            return view('guest.index');
         }else{
-            return redirect("/owner/create");
+            return redirect("/guest/create");
         }
     }
 
@@ -38,7 +41,7 @@ class ownerController extends Controller
      */
     public function create()
     {
-        return view('owner.create');
+        return view('guest.create');
     }
 
     /**
@@ -52,18 +55,18 @@ class ownerController extends Controller
         $this->validate($request, array(
             'phone'=>'required',
             'idno'=>'required',
-            'location'=>'required',
+            'hometown'=>'required',
         ));
-        $owner=new owner([
+        $guest = new guest([
             'phone' => $request->phone,
             'idno' => $request->idno,
-            'location' => $request->location,
+            'hometown' => $request->hometown,
         ]);
 
-      //  $owner->email=$request->email;
+        //  $owner->email=$request->email;
         //$owner->password=$request->password;
-        $owner->user()->save(Auth::user());
-        return redirect()->route('owner.show', $owner->id);
+        $guest->user()->save(Auth::user());
+        return redirect()->route('guest.show', $guest->id);
 
     }
 
@@ -75,9 +78,9 @@ class ownerController extends Controller
      */
     public function show($id)
     {
-        if($owner = Owner::find($id))
-            return view("owner.show")->with('owner', $owner);
-        return view('owner.index')->with('error', 'the user was not found in our records');
+        if($guest = guest::find($id))
+            return view("guest.show")->with('guest', $guest);
+        return view('guest.index')->with('error', 'the user was not found in our records');
     }
 
     /**
@@ -88,8 +91,8 @@ class ownerController extends Controller
      */
     public function edit($id)
     {
-        $owner = Owner::find($id);
-        return view('owner.edit')->with('owner', $owner);
+        $guest = guest::find($id);
+        return view('guest.edit')->with('guest', $guest);
     }
 
     /**
@@ -114,4 +117,5 @@ class ownerController extends Controller
     {
         //
     }
+
 }

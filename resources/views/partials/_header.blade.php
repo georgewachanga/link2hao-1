@@ -16,11 +16,18 @@
 
                 <li><a href="contact">Contact us</a></li>
                 <li><a href="advertise">Advertise </a></li>
-                <li><a href="#">Login </a></li>
+                <div class="pull-right">
+                    @if(Auth::check())
+                        <li><a href="/logout">Logout </a></li>
+                    @else
+                        <li><a href="/login">Login </a></li>
+                        <li><a href="/register">Register</a> </li>
+                    @endif
+                </div>
 
                 <div class="clearfix"></div>
             </ul>
-            <script type="text/javascript" src="js/responsive-nav.js"></script>
+            <script type="text/javascript" src="/js/responsive-nav.js"></script>
         </div>
 
         <!-- start search-->
@@ -67,5 +74,5 @@
 <div class="clearfix"></div>
 </div>
 <div class="kichwa">
-    <img src="images/head.jpg" class="img-responsive"/>
+    <img src="/images/head.jpg" class="img-responsive"/>
 </div>

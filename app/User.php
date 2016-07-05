@@ -28,4 +28,31 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
+    public function isOwner(){
+        if($this->user_type == "App\\owner"){
+            return true;
+        }
+        return false;
+    }
+    public function getUser(){
+        if($this->isOwner()) {
+            return Owner::find($this->user_id);
+        }
+        else if($this->isGuest())
+        {
+            return guest::find($this->user_id);
+        }
+        else {
+            return null;
+        }
+    }
+
+    public function isGuest(){
+        if($this->user_type == 'App\\guest'){
+            return true;
+        }
+        return false;
+    }
+
+
 }

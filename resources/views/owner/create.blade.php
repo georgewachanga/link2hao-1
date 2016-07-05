@@ -1,4 +1,4 @@
-@extends("layout.admin")
+@extends("layout.master")
 
 @section("content")
 
@@ -16,7 +16,7 @@
     {{Form::text('location', null, array('class'=>'form-control'))}}
 
 
-    {{Form::submit('send to database', array('class'=>'btn btn-success btn-lg btn-block '))}}
+    {{Form::submit('create a new owner record', array('class'=>'btn btn-success btn-lg btn-block '))}}
     {!! Form::close() !!}
 @endsection
 

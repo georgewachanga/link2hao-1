@@ -43,6 +43,18 @@ Route::get('newuser','PagesController@GetNewuser');
 
 //resourcesffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 Route::resource('owner','ownerController');
+Route::resource('guest','GuestController');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/checkUser', function(){
+    if(Auth::check()){
+        if(Auth::user()->isOwner() ){
+            return redirect("/owner");
+        }
+        else{
+            return redirect("/home");
+        }
+    }
+});
