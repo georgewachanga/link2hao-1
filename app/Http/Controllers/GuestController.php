@@ -29,7 +29,10 @@ class GuestController extends Controller
     {
         if(Auth::user()->isGuest()){
             return view('guest.index');
-        }else{
+        }elseif(Auth::user()->isOwner()){
+            return redirect('/owner');
+        }
+        else{
             return redirect("/guest/create");
         }
     }
@@ -65,6 +68,7 @@ class GuestController extends Controller
 
         //  $owner->email=$request->email;
         //$owner->password=$request->password;
+        $guest->save();
         $guest->user()->save(Auth::user());
         return redirect()->route('guest.show', $guest->id);
 

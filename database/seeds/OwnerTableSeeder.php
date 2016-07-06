@@ -24,10 +24,6 @@ class OwnerTableSeeder extends Seeder
             $owner->save();
             $user = User::find(rand(40,60));
             $owner->user()->save($user);
-
-
         }
-
-
     }
 }

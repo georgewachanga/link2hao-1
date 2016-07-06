@@ -2,21 +2,26 @@
 
 @section("content")
 
+    <div class="container">
 
-    {!! Form::open(array('route' => 'owner.store')) !!}
-
-
-    {{Form::label('phone', 'phone no.') }}
-    {{Form::text('phone', null, array('class'=>'form-control'))}}
-
-    {{Form::label('idno', 'id no:') }}
-    {{Form::text('idno', null, array('class'=>'form-control'))}}
-
-    {{Form::label('location', 'location:') }}
-    {{Form::text('location', null, array('class'=>'form-control'))}}
+        {!! Form::open(array('route' => 'owner.store')) !!}
 
 
-    {{Form::submit('create a new owner record', array('class'=>'btn btn-success btn-lg btn-block '))}}
-    {!! Form::close() !!}
+        {{Form::label('phone', 'phone no.') }}
+        {{Form::text('phone', null, array('class'=>'form-control'))}}
+
+        {{Form::label('idno', 'id no:') }}
+        {{Form::text('idno', null, array('class'=>'form-control'))}}
+
+        {{Form::label('location', 'location:') }}
+        {{Form::text('location', null, array('class'=>'form-control'))}}
+
+
+        {{Form::submit('create a new owner record', array('class'=>'btn btn-success btn-lg btn-block '))}}
+        {!! Form::close() !!}
+
+    </div>
+
+
 @endsection
 

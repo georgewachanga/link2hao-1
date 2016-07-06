@@ -25,7 +25,8 @@ class ownerController extends Controller
     public function index()
     {
         if(Auth::user()->isOwner()){
-            return view('owner.index');
+            $owner = Auth::user()->getUser();
+            return view('owner.index')->with('owner',$owner);
         }else{
             return redirect("/owner/create");
         }
@@ -62,6 +63,7 @@ class ownerController extends Controller
 
       //  $owner->email=$request->email;
         //$owner->password=$request->password;
+        $owner->save();
         $owner->user()->save(Auth::user());
         return redirect()->route('owner.show', $owner->id);
 
