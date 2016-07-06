@@ -44,6 +44,8 @@ Route::get('newuser','PagesController@GetNewuser');
 //resourcesffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 Route::resource('owner','ownerController');
 Route::resource('guest','GuestController');
+Route::resource('property', 'PropertyController');
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
