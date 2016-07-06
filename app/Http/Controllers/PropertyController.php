@@ -47,13 +47,16 @@ class PropertyController extends Controller
         ]);
 
         if($owner = Auth::user()->getUser()){
-            $owner->properties()->add($property);
+            $owner->properties()->save($property);
             return redirect()->route('property.show', $property->id);
         }
         else{
             return redirect('/owner')->with('error','we do not have a record of you are an owner');
         }
+    }
 
-
+    public function show($id){
+        $property = Property::find($id);
+        return view('properties.show')->with('property',$property);
     }
 }
